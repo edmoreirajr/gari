@@ -69,7 +69,6 @@ Citizen.CreateThread(function()
 				if distance <= 3 then
 					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR O EXPEDIENTE",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(0,38) then
-						--emP.addGroup()
 						emservico = true
 						selecionado = math.random(#locs)
 						CriandoBlip(locs,selecionado)
