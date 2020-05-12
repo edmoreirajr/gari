@@ -139,7 +139,6 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DESENHAR TEXTO 3D
 -----------------------------------------------------------------------------------------------------------------------------------------
-
 function drawTxt(text,font,x,y,scale,r,g,b,a)
 	SetTextFont(font)
 	SetTextScale(scale,scale)
@@ -170,7 +169,6 @@ end
 -- TROCAR ROUPA DO GARI
 -----------------------------------------------------------------------------------------------------------------------------------------
 function ApplyGariSkin()
-
 	local playerPed = PlayerPedId()
 	if DoesEntityExist(playerPed) then
 		Citizen.CreateThread(function()
