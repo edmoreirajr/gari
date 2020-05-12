@@ -144,9 +144,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
 		if emservico then
-			if IsControlJustPressed(0,20) then
-				ESX.ShowNotification('~y~Vá para o próximo local de limpeza.')
-			elseif IsControlJustPressed(0,168) then
+			if IsControlJustPressed(0,168) then
 				emservico = false
 				RemoveBlip(blips)
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)

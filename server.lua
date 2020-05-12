@@ -5,7 +5,8 @@ RegisterServerEvent('esx_garijob:onNPCJobMissionCompleted')
 AddEventHandler('esx_garijob:onNPCJobMissionCompleted', function()
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-	local total   = math.random(300, 750);
+	local total   = math.random(faxina_min, faxina_max);
 	xPlayer.addMoney(total)
 	TriggerClientEvent('esx:showNotification', source, '~y~Limpeza concluída, Você recebeu ~p~'..total..' ~y~reais.')
+	TriggerClientEvent('esx:showNotification', source, '~y~Vá para o próximo local de limpeza ou pressione ~p~F7 ~y~para sair do expediente.')
 end)
