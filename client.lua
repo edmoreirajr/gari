@@ -61,6 +61,26 @@ Citizen.CreateThread(function()
 					end
 				end
 			end
+		else
+			local ped = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(ped))
+			local bowz,cdz = GetGroundZFor_3dCoord(CoordenadaX,CoordenadaY,CoordenadaZ)
+			local distance = GetDistanceBetweenCoords(CoordenadaX,CoordenadaY,cdz,x,y,z,true)
+
+			if distance <= 20 then
+				DrawMarker(21,CoordenadaX,CoordenadaY,CoordenadaZ-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,255,0,0,50,0,0,0,1)
+				if distance <= 3 then
+					drawTxt("PRESSIONE  ~r~F7~w~  PARA SAIR DO EXPEDIENTE",4,0.5,0.93,0.50,255,255,255,180)
+					if IsControlJustPressed(0,168) then
+						emservico = false
+						RemoveBlip(blips)
+						ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+						TriggerEvent('skinchanger:loadSkin', skin)
+						end)
+						ESX.ShowNotification('~y~Você saiu do serviço.')
+					end
+				end
+			end
 		end
 	end
 end)
@@ -78,8 +98,8 @@ Citizen.CreateThread(function()
 			local distance = GetDistanceBetweenCoords(locs[selecionado].x,locs[selecionado].y,cdz,x,y,z,true)
 
 			if distance <= 50.0 then
-				DrawMarker(27,locs[selecionado].x,locs[selecionado].y,locs[selecionado].z+0.20,0,0,0,0,180.0,130.0,2.0,2.0,1.0,204,102,0,50,1,0,0,1)
-				if distance <= 5 then
+				DrawMarker(27,locs[selecionado].x,locs[selecionado].y,locs[selecionado].z+0.20,0,0,0,0,180.0,130.0,2.0,2.0,1.0,255,165,0,50,1,0,0,1)
+				if distance <= 3 then
 					drawTxt("APERTE  ~r~Z~w~  PARA INICIAR A LIMPEZA",4,0.5,0.93,0.50,255,255,255,180)
 					if(IsControlJustReleased(0, 20))then
 						local cSCoords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(PlayerId()), 0.0, 0.0, -5.0)
@@ -118,19 +138,20 @@ Citizen.CreateThread(function()
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- CANCELA - Falta programar	
+-- CANCELAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
 		if emservico then
-			if IsControlJustPressed(0,168) then
-				RemoveBlip(blips)
-				blips = nil
-				selecionado = 0
-				checkped = true
+			if IsControlJustPressed(0,20) then
+				ESX.ShowNotification('~y~Vá para o próximo local de limpeza.')
+			elseif IsControlJustPressed(0,168) then
 				emservico = false
-				--emP.removeGroup()
+				RemoveBlip(blips)
+				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+					TriggerEvent('skinchanger:loadSkin', skin)
+					end)
 				ESX.ShowNotification('~y~Você saiu do serviço.')
 			end
 		end
