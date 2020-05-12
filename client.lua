@@ -49,7 +49,7 @@ Citizen.CreateThread(function()
 
 			if distance <= 20 then
 				DrawMarker(21,CoordenadaX,CoordenadaY,CoordenadaZ-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,255,0,0,50,0,0,0,1)
-				if distance <= 1.2 then
+				if distance <= 3 then
 					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR O EXPEDIENTE",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(0,38) then
 						--emP.addGroup()
@@ -82,7 +82,6 @@ Citizen.CreateThread(function()
 				if distance <= 5 then
 					drawTxt("APERTE  ~r~Z~w~  PARA INICIAR A LIMPEZA",4,0.5,0.93,0.50,255,255,255,180)
 					if(IsControlJustReleased(0, 20))then
-						RemoveBlip(blips)
 						local cSCoords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(PlayerId()), 0.0, 0.0, -5.0)
 						local vassouspawn = CreateObject(GetHashKey(vassoumodel), cSCoords.x, cSCoords.y, cSCoords.z, 1, 1, 1)
 						local netid = ObjToNet(vassouspawn)
@@ -108,6 +107,8 @@ Citizen.CreateThread(function()
 							end
 							Citizen.Wait(1)
 						end
+						Citizen.Wait(10000)
+						RemoveBlip(blips)
 						CriandoBlip(locs,selecionado)
 					end
 				end
@@ -117,7 +118,7 @@ Citizen.CreateThread(function()
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- CANCELAR - Falta programar	
+-- CANCELA - Falta programar	
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
@@ -139,6 +140,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DESENHAR TEXTO 3D
 -----------------------------------------------------------------------------------------------------------------------------------------
+
 function drawTxt(text,font,x,y,scale,r,g,b,a)
 	SetTextFont(font)
 	SetTextScale(scale,scale)
@@ -169,6 +171,7 @@ end
 -- TROCAR ROUPA DO GARI
 -----------------------------------------------------------------------------------------------------------------------------------------
 function ApplyGariSkin()
+
 	local playerPed = PlayerPedId()
 	if DoesEntityExist(playerPed) then
 		Citizen.CreateThread(function()
