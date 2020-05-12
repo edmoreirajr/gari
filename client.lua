@@ -50,7 +50,6 @@ local emservico = false
 local CoordenadaX = 1384.20
 local CoordenadaY = -2079.79
 local CoordenadaZ = 52.19
-local checkped = true
 local vassoumodel = "prop_tool_broom"
 
 -----------------------------------------------------------------------------------------------------------------------------------------
